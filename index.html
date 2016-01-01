@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<title>{% if meta.title %}{{ meta.title }} | {% endif %}{{ site_title }}</title>
+{% if meta.description %}
+	<meta name="description" content="{{ meta.description }}"> 
+{% endif %}{% if meta.robots %}
+	<meta name="robots" content="{{ meta.robots }}">
+{% endif %}
+	
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ theme_url }}/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ theme_url }}/css/simple-sidebar.css" rel="stylesheet">
+    <link href="{{ theme_url }}/css/default.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+    <body>
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="/">
+                            {{ site_title }}
+                        </a>
+
+                    </li>
+
+                    {% for page in pages %}
+                        {% if page.page_type == 'page' %}
+                        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+
+
+                    <!-- Ads #################################### -->
+                    <!-- EDIT this to add your custom list of Ads -->
+                    <li class="ads"><a href="http://mdownhost.me" target="_blank"><button>MDownHost.ME</button><p><small>CMS for developers</small></p></a></li>
+                    <li class="ads"><a href="http://amuzi.me" target="_blank"><button>AMUZI</button><p><small>The open source way to enjoy music</small></p></a></li>
+                    <!-- Ads #################################### -->
+
+
+
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {% if meta.title %}<h1>{{ meta.title }}</h1>{% endif %}
+                            {% if meta.date %} <p class="meta">{{ meta.date }}</p> {% endif %}
+
+                            {% if meta.tags %}
+                                <article>
+                                    <p class="meta">Tags:
+                                        {% for tag in meta.tags %}
+                                            <a href="{{ base_url }}/tag/{{ tag }}">#{{ tag }}</a>
+                                        {% endfor %}
+                                    </p>
+                                </article>
+                            {% endif %}
+
+
+                            {{ content }}
+
+                            {% if meta.page_type == 'page' and meta.page_name == 'blog' %}
+                                {% for page in pages %}
+                                    {% if page.date and false == page.symlink %} <!-- Note we check for Date field (posts) here -->
+                                    <div class="post">
+                                        <h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
+                                        <p class="meta">{{ page.date }}</p>
+                                        <p class="excerpt">{{ page.excerpt }}</p>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+
+                            {% elseif pages and meta.title matches '/^#/' %}
+                            <!-- tags page -->
+                                All tags:
+                                <ul class="tags">
+                                    {% for tag in tag_list %}
+                                    <li><a href="/tag/{{ tag }}">#{{ tag }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                                <p>Posts tagged <a href="{{ page.url }}">#{{ current_tag }}</a>:</p>
+                                {% for page in pages %}
+                                    {% if page.date %}
+                                    <div class="post">
+                                        <h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
+                                        <p class="meta">{{ page.date }}</p>
+                                        <p class="excerpt">{{ page.excerpt }}</p>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            <!-- tags page -->
+                            {% endif %}
+
+                                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+
+
+
+                            {% if meta.date %}
+                            {{ disqus_comments }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+
+
+        <footer>
+            <div class="container">
+                <!-- Customize the footer message -->
+                <p id="legal">Powered by <a target="_blank" href="http://mdownhost.me">MDownHost.me</a> - Copyright &copy; 2011-2016 Diogo Oliveira de Melo.</p>
+            </div>
+        </footer>
+
+
+        </div>
+        <!-- /#wrapper -->
+
+        {{googletrackingcode}}
+
+
+        <!-- jQuery -->
+        <script src="{{ theme_url }}/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ theme_url }}/js/bootstrap.min.js"></script>
+
+        <!-- Menu Toggle Script -->
+        <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        </script>
+    </body>
+</html>
