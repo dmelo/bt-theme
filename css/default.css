@@ -67,3 +67,7 @@ li.ads button {
     border-radius: 5px;
     padding: 1px 18px;
 }
+
+div.row {
+    margin-bottom: 60px;
+}
