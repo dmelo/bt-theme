@@ -5,6 +5,7 @@
 ## Getting Started
 
 To use this theme:
+
 1. download the project
 2. run bower inside the project `bower install`
 3. place bt-theme inside the themes path of Pico
