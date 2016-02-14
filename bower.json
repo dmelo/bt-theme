@@ -1,0 +1,14 @@
+{
+  "name": "bt-theme",
+  "homepage": "https://github.com/dmelo/bt-theme",
+  "authors": [
+    "Diogo Oliveira de Melo <dmelo87@gmail.com>"
+  ],
+  "description": "startbootstrap-simple-sidebar for Pico",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
